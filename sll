@@ -1,0 +1,166 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    # Insert at beginning
+    def insert_begin(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+        print(f"Inserted {data} at beginning")
+
+    # Insert at end
+    def insert_end(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            temp = self.head
+            while temp.next is not None:
+                temp = temp.next
+            temp.next = new_node
+        print(f"Inserted {data} at end")
+
+    # Delete at beginning
+    def delete_begin(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            temp = self.head
+            self.head = self.head.next
+            print(f"Deleted {temp.data} from beginning")
+
+    # Delete at end
+    def delete_end(self):
+        if self.head is None:
+            print("List is empty")
+        elif self.head.next is None:
+            print(f"Deleted {self.head.data} from end")
+            self.head = None
+        else:
+            temp = self.head
+            while temp.next.next is not None:
+                temp = temp.next
+            print(f"Deleted {temp.next.data} from end")
+            temp.next = None
+
+    # Display the list
+    def display(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            temp = self.head
+            while temp is not None:
+                print(temp.data, end=" -> ")
+                temp = temp.next
+            print("None")
+
+
+# Example usage
+ll = LinkedList()
+ll.insert_begin(10)
+ll.insert_end(20)
+ll.insert_end(30)
+ll.display()
+
+ll.delete_begin()
+ll.display()
+
+ll.delete_end()
+ll.display()
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    # Insert at given position (using while loop)
+    def insert_pos(self, data, pos):
+        new_node = Node(data)
+
+        # If inserting at the beginning
+        if pos == 1:
+            new_node.next = self.head
+            self.head = new_node
+            print(f"Inserted {data} at position {pos}")
+            return
+
+        temp = self.head
+        count = 1
+
+        # Traverse till (pos - 1)
+        while temp is not None and count < pos - 1:
+            temp = temp.next
+            count += 1
+
+        if temp is None:
+            print("Position out of range")
+            return
+
+        new_node.next = temp.next
+        temp.next = new_node
+        print(f"Inserted {data} at position {pos}")
+
+    # Delete at given position (using while loop)
+    def delete_pos(self, pos):
+        if self.head is None:
+            print("List is empty")
+            return
+
+        # If deleting first node
+        if pos == 1:
+            temp = self.head
+            self.head = self.head.next
+            print(f"Deleted {temp.data} from position {pos}")
+            return
+
+        temp = self.head
+        count = 1
+
+        # Traverse till (pos - 1)
+        while temp is not None and count < pos - 1:
+            temp = temp.next
+            count += 1
+
+        if temp is None or temp.next is None:
+            print("Position out of range")
+            return
+
+        print(f"Deleted {temp.next.data} from position {pos}")
+        temp.next = temp.next.next
+
+    # Display the linked list
+    def display(self):
+        temp = self.head
+        if temp is None:
+            print("List is empty")
+            return
+        while temp:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+        print("None")
+
+
+# Example usage
+ll = LinkedList()
+ll.insert_pos(10, 1)
+ll.insert_pos(20, 2)
+ll.insert_pos(30, 3)
+ll.display()
+
+ll.insert_pos(15, 2)
+ll.display()
+
+ll.delete_pos(3)
+ll.display()
+
